@@ -1,0 +1,80 @@
+//Live sass compiler extension can be installed to compile sass files easily
+//by clicking watch sass button at the bottom
+
+//With Sass you can define variables and use them as values like color height width or font family
+//If you want to import a scss file and not to compile it you can use @import
+//You have to put and underscore _ at begining of the filename
+//This way you can divide your components and settings
+@import 'config';
+// The place you put import commands matter. Because it will be compiled where you put them
+//This is why we put config before the styles. We use variables like colors.
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: $light-color;
+    font-family: $font-stack;
+    line-height: 1.6;
+}
+
+img {
+    width: 100%;
+}
+a {
+    text-decoration: none;
+}
+.showcase {
+    @include set-background($primary-color);
+    height: 600px;
+
+    //You can nest style blocks insted of appending like .showcase nav {}
+    //This will reduce copy paste as shown below
+    /*
+    .showcase nav {}
+    .showcase li {}
+    .showcase li a {}
+    */
+    a {
+        color: set-text-color($primary-color);
+    }
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        ul { //This is equal to .showcase nav ul {} in css. You can nest more than one level
+            display: flex;
+            list-style: none;
+        }
+        li {
+            padding: 15px;
+        }
+        a:hover {
+            color: $secondary-color;
+        }
+    }
+    &-content { //This will be compiled as .showcase-content. & is shortcut for parent name
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 30px;
+
+        img {
+            width: 50%;
+        }
+        h1 {
+            font-size: 50px;
+            line-height: 1.2;
+        }
+    }
+}
+
+@import 'utilities';
+@import 'buttons';
+@import 'mobile';

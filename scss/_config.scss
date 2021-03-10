@@ -1,0 +1,24 @@
+//If you make a change in this config file you can apply the change to all pages easily
+//This is why we divide files as config, utilities, buttons.
+$font-stack: Arial, Helvetica, sans-serif;
+$light-color: #f4f4f4;
+$primary-color: #0e6cff;
+$secondary-color: #ff8700;
+
+
+//Set text color based on darkness of background-color with function
+
+@function set-text-color($color) { //We take background color as argument and make text color visible
+    @if(lightness($color) > 70) {
+        @return #333; //If background is too light we make text dark with this if statement
+    } @else {
+        @return #fff;
+    }
+}// Try changing primary color into white you will see the effect. Text will be dark gray
+
+//Set background color and text color based on with mixin
+
+@mixin set-background($color) {
+    background-color: $color;
+    color: set-text-color($color);
+}
